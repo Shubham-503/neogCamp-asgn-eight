@@ -7,6 +7,9 @@ const emojiDb = {
   "😒": "Not Amused Face",
   "😊": "Smiling Face",
   "😂": "Face with Tears of Joy",
+  "✌": "Victory",
+  "🤞": "Finger crossed",
+  "👀": "Eyes",
 };
 var emojisWeKnow = Object.keys(emojiDb);
 
