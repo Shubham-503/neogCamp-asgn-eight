@@ -14,21 +14,30 @@ const emojiDb = {
 var emojisWeKnow = Object.keys(emojiDb);
 
 export default function App() {
+  const [input, setInput] = useState("");
   const [meaning, setMeaning] = useState("");
 
   function handleEmojiInput(event) {
-    const emoji = event.target.value;
-    const meaning = emojiDb[emoji];
-    if (meaning === undefined) {
-      return "Not in our Db";
+    const inputEmoji = event.target.value;
+    setInput(inputEmoji);
+    console.log("input >>", input);
+    console.log("Meaning>> ", meaning);
+    // setMeaning(emojiDb[input]);
+    console.log(emojiDb[inputEmoji]);
+    if (inputEmoji in emojiDb) {
+      console.log("Inside if block");
+      setMeaning(emojiDb[inputEmoji]);
+    } else {
+      setMeaning("Not in our Db");
+
+      console.log("meaning", meaning);
     }
-    setMeaning(meaning);
-    console.log(meaning);
   }
 
   function handleEmojiClick(emoji) {
     const meaning = emojiDb[emoji];
     setMeaning(meaning);
+    // setInput("");
   }
 
   console.log(emojisWeKnow);
@@ -36,9 +45,13 @@ export default function App() {
   return (
     <div className="App">
       <h1>EmojiPedia</h1>
-      <input onChange={(event) => handleEmojiInput(event)} />
+      <input
+        value={input}
+        onChange={handleEmojiInput}
+        placeholder={"Search your Emoji"}
+      />
 
-      <h3 className="meaning">{meaning || "Search for Emoji"} </h3>
+      <h3 className="meaning">{meaning} </h3>
 
       {emojisWeKnow.map(function (emoji) {
         return (
